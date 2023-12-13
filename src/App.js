@@ -1,5 +1,6 @@
 import "./App.css";
 import React from "react";
+import QuotesFetcher from "./fetchers/quotes_fetcher";
 
 function App() {
   return (
@@ -7,7 +8,9 @@ function App() {
       <header className="App-header">
         <section>
           <h1>FETCHER</h1>
-          <div></div>
+          <div>
+            <QuotesFetcher />
+          </div>
         </section>
       </header>
     </div>
