@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-const CatFacts = () => {
+const CatFact = () => {
   const [fact, setFact] = useState(null);
   const [status, setStatus] = useState(false);
   const url = "https://catfact.ninja/fact";
@@ -35,4 +35,4 @@ const CatFacts = () => {
   );
 };
 
-export default CatFacts;
+export default CatFact;
