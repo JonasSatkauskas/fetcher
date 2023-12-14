@@ -12,14 +12,23 @@ const CatFacts = () => {
   }
   return (
     <div>
-      <p>{fact.fact}</p>
-      <button
-        onClick={() => {
-          fetchFacts();
-        }}
-      >
-        Click for Cat Fact
-      </button>
+      {fact && fact.fact ? (
+        <>
+          <p>{fact.fact}</p>
+          <button
+            onClick={() => {
+              fetchFacts();
+            }}
+          >
+            Click for Cat Fact
+          </button>
+        </>
+      ) : (
+        <>
+          <p>Press the button</p>
+          <button onClick={() => fetchFacts()}>Cat Fact</button>
+        </>
+      )}
     </div>
   );
 };
