@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const CatFacts = () => {
   const [fact, setFact] = useState(null);
@@ -18,7 +18,7 @@ const CatFacts = () => {
           fetchFacts();
         }}
       >
-        Click for Cats
+        Click for Cat Fact
       </button>
     </div>
   );

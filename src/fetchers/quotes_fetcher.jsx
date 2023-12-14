@@ -1,32 +1,33 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const QuotesFetcher = () => {
   const [quotes, setQuotes] = useState({ content: "", author: "" });
-  const [error, setError] = useState(null);
 
   const url = "https://api.api-ninjas.com/v1/quotes?category=life";
-  const headers = { "X-Api-Key": "PncZ7+oMTlqxtel6SDEo1g==oHd1LRTvHwdLvvID" };
+  const config = {
+    headers: { "X-Api-Key": "PncZ7+oMTlqxtel6SDEo1g==oHd1LRTvHwdLvvID" },
+  };
 
-  useEffect(() => {
-    async function getQuotes() {
-      try {
-        let data = await fetch(url, { headers }).then((resp) => {
-          resp.json();
-        });
-        if (data.error) {
-          setError(data.error);
-        } else {
-          setQuotes(data[0]);
-        }
-      } catch (error) {
-        setError("Error fetching quotes");
-      }
+  async function getQuotes() {
+    try {
+      const response = await fetch(url, config);
+      const data = await response.json();
+      setQuotes(data);
+    } catch (err) {
+      console.error("ERROR:", err);
     }
-    getQuotes();
-  }, []);
-
-  return <div>{error ? <p>Error: {error}</p> : <p>{quotes.content}</p>}</div>;
+  }
+  console.log(quotes[0]);
+  return (
+    <div>
+      <p>{quotes[0].quote}</p>
+      <p>
+        AUTHOR: <b>{quotes[0].author}</b>
+      </p>
+      <button onClick={() => getQuotes()}>Click for quote</button>
+    </div>
+  );
 };
 
 export default QuotesFetcher;
