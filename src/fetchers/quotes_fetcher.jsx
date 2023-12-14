@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 
 const QuotesFetcher = () => {
-  const [quotes, setQuotes] = useState({ content: "", author: "" });
+  const [quotes, setQuotes] = useState();
 
   const url = "https://api.api-ninjas.com/v1/quotes?category=life";
   const config = {
@@ -18,14 +18,23 @@ const QuotesFetcher = () => {
       console.error("ERROR:", err);
     }
   }
-  console.log(quotes[0]);
+  console.log(quotes);
   return (
     <div>
-      <p>{quotes[0].quote}</p>
-      <p>
-        AUTHOR: <b>{quotes[0].author}</b>
-      </p>
-      <button onClick={() => getQuotes()}>Click for quote</button>
+      {quotes && quotes[0] ? (
+        <>
+          <p>{quotes[0].quote}</p>
+          <p>
+            AUTHOR: <b>{quotes[0].author}</b>
+          </p>
+          <button onClick={() => getQuotes()}>Click for quote</button>
+        </>
+      ) : (
+        <>
+          <p>Not available</p>
+          <button onClick={() => getQuotes()}> Show quote</button>
+        </>
+      )}
     </div>
   );
 };
