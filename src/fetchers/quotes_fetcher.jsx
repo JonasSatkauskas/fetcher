@@ -3,6 +3,7 @@ import { useState } from "react";
 
 const QuotesFetcher = () => {
   const [quotes, setQuotes] = useState();
+  const [status, setStatus] = useState(false);
 
   const url = "https://api.api-ninjas.com/v1/quotes?category=life";
   const config = {
@@ -13,15 +14,15 @@ const QuotesFetcher = () => {
     try {
       const response = await fetch(url, config);
       const data = await response.json();
-      setQuotes(data);
+      await setQuotes(data);
+      await setStatus(true);
     } catch (err) {
       console.error("ERROR:", err);
     }
   }
-  console.log(quotes);
   return (
     <div>
-      {quotes && quotes[0] ? (
+      {status ? (
         <>
           <p>{quotes[0].quote}</p>
           <p>
@@ -31,7 +32,7 @@ const QuotesFetcher = () => {
         </>
       ) : (
         <>
-          <p>Not available</p>
+          <p>Press the button for quote</p>
           <button onClick={() => getQuotes()}> Show quote</button>
         </>
       )}

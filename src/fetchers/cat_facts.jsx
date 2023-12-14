@@ -3,16 +3,18 @@ import { useState } from "react";
 
 const CatFacts = () => {
   const [fact, setFact] = useState(null);
+  const [status, setStatus] = useState(false);
   const url = "https://catfact.ninja/fact";
 
   async function fetchFacts() {
     const response = await fetch(url);
     const data = await response.json();
-    setFact(data);
+    await setFact(data);
+    await setStatus(true);
   }
   return (
     <div>
-      {fact && fact.fact ? (
+      {status ? (
         <>
           <p>{fact.fact}</p>
           <button
