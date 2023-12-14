@@ -1,38 +1,36 @@
 import React from "react";
 import { useState } from "react";
 
-const CatFacts = () => {
+const CatFacts = ({ limit }) => {
   const [facts, setFacts] = useState([]);
   const [status, setStatus] = useState(false);
-  const url = "https://catfact.ninja/facts/?limit=3";
-  const params = { limit: 2 };
+  const url = `https://catfact.ninja/facts/?limit=${limit}`;
 
   async function fetchFacts() {
-    const response = await fetch(url, params);
+    const response = await fetch(url);
     const data = await response.json();
-    await setFacts(data);
-    await setStatus(true);
+    setFacts(data);
+    setStatus(true);
   }
   console.log(facts.data);
+  const clickHandler = () => {
+    setFacts([]);
+    setStatus(false);
+    fetchFacts();
+  };
   return (
     <div>
       {status ? (
         <>
           {facts.data.map((item) => {
-            return <p>{item.fact}</p>;
+            return <p key={item.length}>{item.fact}</p>;
           })}
-          <button
-            onClick={() => {
-              fetchFacts();
-            }}
-          >
-            Click for Cat Facts
-          </button>
+          <button onClick={clickHandler}>Click for Cat Facts</button>
         </>
       ) : (
         <>
           <p>Press the button</p>
-          <button onClick={() => fetchFacts()}>Cat Fact</button>
+          <button onClick={clickHandler}>Cat Fact</button>
         </>
       )}
     </div>

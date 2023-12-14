@@ -12,7 +12,7 @@ function App() {
           <div>
             <QuotesFetcher />
             <CatFact />
-            <CatFacts />
+            <CatFacts limit={8} />
           </div>
         </section>
       </header>
