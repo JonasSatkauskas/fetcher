@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 import QuotesFetcher from "./fetchers/quotes_fetcher";
-import CatFacts from "./fetchers/cat_facts";
+import CatFact from "./fetchers/cat_fact";
 function App() {
   return (
     <div className="App">
@@ -10,7 +10,7 @@ function App() {
           <h1>FETCHER</h1>
           <div>
             <QuotesFetcher />
-            <CatFacts />
+            <CatFact />
           </div>
         </section>
       </header>
